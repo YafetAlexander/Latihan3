@@ -1,0 +1,21 @@
+const express = require('express');
+const app = express();
+const PORT = 8001;
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello, World');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
+});
+
+app.get('/api/payments', authBearer, (req, res) => {
+    res.json([
+        { id: 101, user: 'Andi', amount: 150000, status: 'Succes', method: 'Bank Transfer' },
+        { id: 102, user: 'Budi', amount: 250000, status: 'Pending', method: 'Credit Card' },
+        { id: 103, user: 'Cici', amount: 50000, status: 'Failed', method: 'E-Wallet' }
+    ]);
+});
